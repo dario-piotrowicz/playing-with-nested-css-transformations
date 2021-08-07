@@ -62,7 +62,7 @@
     </div>
 </body>
 <script>
-    document.getElementById('speed').addEventListener('change', (event) => {
+    document.getElementById('speed').addEventListener('input', (event) => {
         const speedValue = event.target.value;
         document.documentElement.style.setProperty('--animation-duration', `${speedValue}s`);
     });
