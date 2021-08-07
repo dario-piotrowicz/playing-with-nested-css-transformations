@@ -20,9 +20,10 @@
         }
 
         body > .box {
-            margin: 10rem auto;
+            margin: 5rem auto;
             width: min-content;
             aspect-ratio: 1/1;
+            overflow: hidden;
         }
 
         @keyframes rotation {
@@ -30,19 +31,32 @@
                 transform: rotateZ(1turn);
             }
         }
+
+        .controls {
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: .5rem;
+            z-index: 9999;
+        }
+
+        .controls > div {
+            margin: 15px 5px;
+        }
     </style>
 </head>
 <body>
-    <div>
-        <label for="speed">speed: </label>
-        <input type="number" name="speed" id="speed" min="0" value="5">
-        <span>seconds</span>
-    </div>
-    <div>
-        <label for="color">color: </label>
-        <input type="color" name="color" id="color" value="#0000ff">
-
-    </div>
+    <aside class="controls">
+        <div>
+            <label for="speed">speed: </label>
+            <input type="number" name="speed" id="speed" min="0" value="5">
+            <span>seconds</span>
+        </div>
+        <div>
+            <label for="color">color: </label>
+            <input type="color" name="color" id="color" value="#0000ff">
+        </div>
+    </aside>
     <div class="box">
         <div class="box">
             <div class="box">
