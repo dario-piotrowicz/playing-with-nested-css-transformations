@@ -8,9 +8,10 @@
     <style>
         :root {
          --animation-duration: 5s;
+         --color: blue;
         }
         .box {
-            border: .5rem solid rgb(0, 47, 255);
+            border: .5rem solid var(--color);
             border-right: .5rem solid transparent;
             border-bottom: .5rem solid transparent;
             border-radius: 50%;
@@ -37,6 +38,11 @@
         <input type="number" name="speed" id="speed" min="0" value="5">
         <span>seconds</span>
     </div>
+    <div>
+        <label for="color">color: </label>
+        <input type="color" name="color" id="color" value="#0000ff">
+
+    </div>
     <div class="box">
         <div class="box">
             <div class="box">
@@ -59,6 +65,11 @@
     document.getElementById('speed').addEventListener('change', (event) => {
         const speedValue = event.target.value;
         document.documentElement.style.setProperty('--animation-duration', `${speedValue}s`);
+    });
+
+    document.getElementById('color').addEventListener('input', (event) => {
+        const colorValue = event.target.value;
+        document.documentElement.style.setProperty('--color', colorValue);
     });
 </script>
 </html>
