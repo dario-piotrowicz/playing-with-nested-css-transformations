@@ -109,7 +109,6 @@
     };
     document.getElementById('elements').addEventListener('input', (event) => {
         const elementsValue = event.target.value;
-        console.log({elementsValue});
         elementsCurrentValueElement.innerText = event.target.value;
         boxesContainerElement.innerHTML = buildBoxesContainerInnerHtml(event.target.value, 0);
     });
