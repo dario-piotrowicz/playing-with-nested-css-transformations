@@ -54,6 +54,10 @@
         .controls > div {
             margin: 15px 5px;
         }
+
+        input:disabled {
+            opacity: 0.2;
+        }
     </style>
 </head>
 <body>
@@ -75,6 +79,8 @@
         <div>
             <label for="color2">color2: </label>
             <input type="color" name="color2" id="color2" value="#00ff00">
+            <label for="color2-same-as-color1">&nbsp; same as color1: </label>
+            <input type="checkbox" name="color2-same-as-color1" id="color2-same-as-color1">
         </div>
     </aside>
     <div id="boxes-container">
@@ -109,13 +115,24 @@
         boxesContainerElement.innerHTML = buildBoxesContainerInnerHtml(event.target.value, 0);
     });
 
-    document.getElementById('color1').addEventListener('input', (event) => {
+    const color1InputElement = document.getElementById('color1');
+    const color2InputElement = document.getElementById('color2');
+    color1InputElement.addEventListener('input', (event) => {
         const colorValue = event.target.value;
         document.documentElement.style.setProperty('--color1', colorValue);
     });
-    document.getElementById('color2').addEventListener('input', (event) => {
+    color2InputElement.addEventListener('input', (event) => {
         const colorValue = event.target.value;
         document.documentElement.style.setProperty('--color2', colorValue);
+    });
+    document.getElementById('color2-same-as-color1').addEventListener('change', (event) => {
+        const sameValue = event.target.checked;
+        color2InputElement.disabled = sameValue;
+        if(sameValue){
+            document.documentElement.style.setProperty('--color2', color1InputElement.value);
+        } else {
+            document.documentElement.style.setProperty('--color2', color2InputElement.value);
+        }
     });
 </script>
 </html>
