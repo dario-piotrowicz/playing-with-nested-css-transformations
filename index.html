@@ -8,15 +8,26 @@
     <style>
         :root {
          --animation-duration: 5s;
-         --color: blue;
+         --color1: #0000ff;
+         --color2: #00ff00;
         }
         .box {
-            border: .5rem solid var(--color);
+            /* border: .5rem solid black; */
             border-right: .5rem solid transparent;
             border-bottom: .5rem solid transparent;
             border-radius: 50%;
             margin: .13rem;
             animation: rotation var(--animation-duration) infinite alternate ease-in-out;
+        }
+
+        .box.color1 {
+            border-top: .5rem solid var(--color1);
+            border-left: .5rem solid var(--color1);
+        }
+
+        .box.color2 {
+            border-top: .5rem solid var(--color2);
+            border-left: .5rem solid var(--color2);
         }
 
         #boxes-container {
@@ -58,16 +69,20 @@
             <span> (<span id="elements-current-value">5</span>)</span>
         </div>
         <div>
-            <label for="color">color: </label>
-            <input type="color" name="color" id="color" value="#0000ff">
+            <label for="color1">color1: </label>
+            <input type="color" name="color1" id="color1" value="#0000ff">
+        </div>
+        <div>
+            <label for="color2">color2: </label>
+            <input type="color" name="color2" id="color2" value="#00ff00">
         </div>
     </aside>
     <div id="boxes-container">
-        <div class="box">
-            <div class="box">
-                <div class="box">
-                    <div class="box">
-                        <div class="box">
+        <div class="box color1">
+            <div class="box color2">
+                <div class="box color1">
+                    <div class="box color2">
+                        <div class="box color1">
                         </div>
                     </div>
                 </div>
@@ -83,20 +98,24 @@
 
     const elementsCurrentValueElement = document.getElementById('elements-current-value');
     const boxesContainerElement = document.getElementById('boxes-container');
-    const buildBoxesContainerInnerHtml = (numOfBoxes) => {
+    const buildBoxesContainerInnerHtml = (numOfBoxes, level) => {
         if(numOfBoxes<=0) return '';
-        return `<div class="box">${buildBoxesContainerInnerHtml(numOfBoxes-1)}</div>`;
+        return `<div class="box color${level % 2 === 0 ? '1' : '2'}">${buildBoxesContainerInnerHtml(numOfBoxes-1, level+1)}</div>`;
     };
     document.getElementById('elements').addEventListener('input', (event) => {
         const elementsValue = event.target.value;
         console.log({elementsValue});
         elementsCurrentValueElement.innerText = event.target.value;
-        boxesContainerElement.innerHTML = buildBoxesContainerInnerHtml(event.target.value);
+        boxesContainerElement.innerHTML = buildBoxesContainerInnerHtml(event.target.value, 0);
     });
 
-    document.getElementById('color').addEventListener('input', (event) => {
+    document.getElementById('color1').addEventListener('input', (event) => {
         const colorValue = event.target.value;
-        document.documentElement.style.setProperty('--color', colorValue);
+        document.documentElement.style.setProperty('--color1', colorValue);
+    });
+    document.getElementById('color2').addEventListener('input', (event) => {
+        const colorValue = event.target.value;
+        document.documentElement.style.setProperty('--color2', colorValue);
     });
 </script>
 </html>
