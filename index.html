@@ -11,7 +11,7 @@
          --color1: #0000ff;
          --color2: #00ff00;
         }
-        .box {
+        .element {
             border: .5rem solid black;
             border-right: .5rem solid transparent;
             border-bottom: .5rem solid transparent;
@@ -20,17 +20,17 @@
             animation: rotation var(--animation-duration) infinite alternate ease-in-out;
         }
 
-        .box.color1 {
+        .element.color1 {
             border-top: .5rem solid var(--color1);
             border-left: .5rem solid var(--color1);
         }
 
-        .box.color2 {
+        .element.color2 {
             border-top: .5rem solid var(--color2);
             border-left: .5rem solid var(--color2);
         }
 
-        #boxes-container {
+        #elements-container {
             margin: 5rem auto;
             width: min-content;
             overflow: hidden;
@@ -67,8 +67,8 @@
             <span>seconds</span>
         </div>
         <div>
-            <label for="elements">elements: </label>
-            <input type="range" name="elements" id="elements" min="0" max="50" value="5">
+            <label for="elements-input">elements: </label>
+            <input type="range" name="elements" id="elements-input" min="0" max="50" value="5">
             <span> (<span id="elements-current-value">5</span>)</span>
         </div>
         <div>
@@ -82,12 +82,12 @@
             <input type="checkbox" name="color2-same-as-color1" id="color2-same-as-color1">
         </div>
     </aside>
-    <div id="boxes-container">
-        <div class="box color1">
-            <div class="box color2">
-                <div class="box color1">
-                    <div class="box color2">
-                        <div class="box color1">
+    <div id="elements-container">
+        <div class="element color1">
+            <div class="element color2">
+                <div class="element color1">
+                    <div class="element color2">
+                        <div class="element color1">
                         </div>
                     </div>
                 </div>
@@ -102,15 +102,15 @@
     });
 
     const elementsCurrentValueElement = document.getElementById('elements-current-value');
-    const boxesContainerElement = document.getElementById('boxes-container');
-    const buildBoxesContainerInnerHtml = (numOfBoxes, level) => {
-        if(numOfBoxes<=0) return '';
-        return `<div class="box color${level % 2 === 0 ? '1' : '2'}">${buildBoxesContainerInnerHtml(numOfBoxes-1, level+1)}</div>`;
+    const elementsContainerElement = document.getElementById('elements-container');
+    const buildElementsContainerInnerHtml = (numOfElements, level) => {
+        if(numOfElements<=0) return '';
+        return `<div class="element color${level % 2 === 0 ? '1' : '2'}">${buildElementsContainerInnerHtml(numOfElements-1, level+1)}</div>`;
     };
-    document.getElementById('elements').addEventListener('input', (event) => {
+    document.getElementById('elements-input').addEventListener('input', (event) => {
         const elementsValue = event.target.value;
         elementsCurrentValueElement.innerText = event.target.value;
-        boxesContainerElement.innerHTML = buildBoxesContainerInnerHtml(event.target.value, 0);
+        elementsContainerElement.innerHTML = buildElementsContainerInnerHtml(event.target.value, 0);
     });
 
     const color1InputElement = document.getElementById('color1');
