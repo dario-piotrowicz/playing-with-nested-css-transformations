@@ -115,15 +115,19 @@
 
     const color1InputElement = document.getElementById('color1');
     const color2InputElement = document.getElementById('color2');
+    const color2SameAsColor1CheckboxElement = document.getElementById('color2-same-as-color1');
     color1InputElement.addEventListener('input', (event) => {
         const colorValue = event.target.value;
         document.documentElement.style.setProperty('--color1', colorValue);
+        if(color2SameAsColor1CheckboxElement.checked){
+            document.documentElement.style.setProperty('--color2', colorValue);
+        }
     });
     color2InputElement.addEventListener('input', (event) => {
         const colorValue = event.target.value;
         document.documentElement.style.setProperty('--color2', colorValue);
     });
-    document.getElementById('color2-same-as-color1').addEventListener('change', (event) => {
+    color2SameAsColor1CheckboxElement.addEventListener('change', (event) => {
         const sameValue = event.target.checked;
         color2InputElement.disabled = sameValue;
         if(sameValue){
